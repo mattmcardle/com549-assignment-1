@@ -1,5 +1,13 @@
 version: '2'
 services:
+  db:
+    build: ./db
+    environment:
+     - ON_CREATE_DB=league
+     - MYSQL_PASS=root
+     - MYSQL_USERNAME=root
+    ports:
+    - "3308:3306"
   league:
     build: ./league
     ports:
@@ -8,10 +16,6 @@ services:
     - ./league/:/var/www/league/
     links:
     - db
-  db:
-    build: ./db
     environment:
-     - ON_CREATE_DB=league
      - MYSQL_PASS=root
-    ports:
-    - "3308:3306"
+     - MYSQL_USERNAME=root
