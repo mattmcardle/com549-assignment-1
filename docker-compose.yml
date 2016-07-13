@@ -1,0 +1,17 @@
+version: '2'
+services:
+  league:
+    build: ./league
+    ports:
+    - "8080:80"
+    volumes:
+    - ./league/:/var/www/league/
+    links:
+    - db
+  db:
+    build: ./db
+    environment:
+     - ON_CREATE_DB=league
+     - MYSQL_PASS=root
+    ports:
+    - "3308:3306"
